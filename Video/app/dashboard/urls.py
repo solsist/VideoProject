@@ -3,7 +3,9 @@
 from django.urls import path
 from .views.base import Index
 from .views.auth import Login, Logout, AdminManager, UpdateAdminStatus
-from .views.video import ExternalVideo, VideoSubView, VideoStarView, StarDelete
+from .views.video import (ExternalVideo, VideoSubView, VideoStarView,
+                          StarDelete, SubDelete, VideoUpdate, VideoStatusUpdate)
+
 
 urlpatterns = [
     path('', Index.as_view(), name='dashboard_index'),
@@ -15,6 +17,9 @@ urlpatterns = [
     path('video/videosub/<int:video_id>', VideoSubView.as_view(), name='video_sub'),
     path('video/star', VideoStarView.as_view(), name='video_star'),
     path('video/star/delete/<int:star_id>/<int:video_id>', StarDelete.as_view(), name='star_delete'),
+    path('video/sub/delete/<int:videosub_id>/<int:video_id>', SubDelete.as_view(), name='sub_delete'),
+    path('video/update/<int:video_id>', VideoUpdate.as_view(), name='video_update'),
+    path('video/update/status/<int:video_id>', VideoStatusUpdate.as_view(), name='update_status'),
 
 ]
 

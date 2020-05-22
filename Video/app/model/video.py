@@ -25,7 +25,7 @@ class FromType(Enum):
 
 
 FromType.youku.label = '优酷'
-FromType.custom.label = '自制'
+FromType.custom.label = '本地'
 
 
 class NationalityType(Enum):
@@ -88,6 +88,14 @@ class VideoStar(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def ident(self):
+        try:
+            result = IdentityType(self.identity)
+        except:
+            return ''
+        return result.label
 
 
 class VideoSub(models.Model):
