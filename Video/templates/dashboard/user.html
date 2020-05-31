@@ -1,0 +1,43 @@
+<%inherit file="base.html" />
+<%! from app.model.auth import ClientUser %>
+<%! from app.model.video import Gender %>
+<%! from django.shortcuts import reverse %>
+<%def name="content()">
+<h1>用户</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>用户名</th>
+            <th>性别</th>
+            <th>生日</th>
+            <th>头像</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>编辑</th>
+        </tr>
+    </thead>
+    % for user in users:
+        <tbody>
+            <tr>
+                <th>${user.username}</th>
+                % if not user.gender:
+                <th>空</th>
+                % else:
+                <th>${Gender(user.gender).label}</th>
+                % endif
+                <th>${str(user.birthday).split(' ')[0]}</th>
+                <th><img class="video-images" src="${user.avatar}"/></td></th>
+                <th>${user.status}</th>
+                <th>${str(user.create_time).split('.')[0]}</th>
+                <th><a href="${reverse('user_status', kwargs={'user_id': user.id})}">修改状态</a></th>
+            </tr>
+        </tbody>
+    % endfor
+</table>
+
+</%def>
+
+<%def name="css()">
+<link href="/static/dashboard/css/external_video.css" rel="stylesheet"/>
+</%def>

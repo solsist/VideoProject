@@ -1,0 +1,69 @@
+<%inherit file="../base.html" />
+<%def name="nav()">
+信息修改
+</%def>
+
+<%! from django.shortcuts import reverse %>
+<%!
+from app.model.video import Gender
+from app.model.auth import ClientUser
+%>
+
+
+<%def name="content()">
+<form enctype="multipart/form-data" method="post">
+    ${csrf_token}
+    <div class="parent-div">
+        % for user in person:
+        <div class="info-div">
+            用户名:${user.username}
+        </div>
+        <div class="info-div">
+             新的密码：  <input type="password"  name="password" >
+        </div>
+        <div class="info-div">
+        % if not user.gender:
+        性别：<select name="gender">
+                <option>${Gender.female.label}</option>
+                % for gender in Gender:
+                % if gender.label != Gender.female.label:
+                <option value="${gender.value}">${gender.label}</option>
+                % endif
+                % endfor
+            </select>
+        % else:
+        性别：<select name="gender">
+                <option value="${user.gender}">${Gender(user.gender).label}</option>
+                % for gender in Gender:
+                % if gender.label != user.gender:
+                <option value="${gender.value}">${gender.label}</option>
+                % endif
+                % endfor
+            </select>
+        % endif
+        </div>
+        <div class="info-div">
+            生日：<input type="text"  name="birthday" value="${user.birthday}">
+        </div>
+
+        <div class="info-div">
+            <label>添加头像</label> <input id="image" type="file" name="image" class="form-control"/><br>
+
+        </div>
+
+
+        % endfor
+        <input type="hidden" value="${user.username}" name="username" />
+        <input type="hidden" value="${user.id}" name="user_id" />
+
+        <button type="submit" class="btn btn-info" >确认修改</button>
+
+    </div>
+</form>
+
+</%def>
+
+
+<%def name="css()">
+<link href="/static/client/css/info.css" rel="stylesheet" />
+</%def>
