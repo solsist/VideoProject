@@ -9,7 +9,7 @@
 </head>
 <body>
 <%! from django.shortcuts import reverse %>
-<header>导航</header>
+<header>${self.nav()}</header>
 <div class="base-content">
     ${self.content()}
 </div>
@@ -29,3 +29,4 @@ ${self.js()}
 <%def name="content()"></%def>
 <%def name="js()"></%def>
 <%def name="css()"></%def>
+<%def name="nav()"></%def>

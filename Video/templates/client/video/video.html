@@ -1,5 +1,19 @@
 <%inherit file="../base.html" />
-<%! from django.shortcuts import reverse %>
+<%!
+from django.shortcuts import reverse
+from app.model.video import FromType
+%>
+
+<%def name="nav()">
+% for video in videos:
+% if video.from_to == FromType.custom.value:
+内链视频
+% else:
+外链视频
+% endif
+% endfor
+</%def>
+
 <%def name="content()">
 % for video in videos:
 <div class="video-show">

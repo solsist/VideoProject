@@ -19,6 +19,15 @@ VideoType.variety.label = '综艺'
 VideoType.other.label = '其他'
 
 
+class Gender(Enum):
+    male = 'male'
+    female = 'female'
+
+
+Gender.male.label = '男'
+Gender.female.label = '女'
+
+
 class FromType(Enum):
     youku = 'youku'
     custom = 'custom'

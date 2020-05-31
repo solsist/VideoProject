@@ -1,12 +1,27 @@
 <%inherit file="../base.html" />
 
+<%def name="nav()">
+个人中心
+</%def>
 <%def name="content()">
 <% from django.shortcuts import reverse %>
 % if user:
 <div class="user-area">
-    ${user.username}
-    <a class="a-style" href="${reverse('client_logout')}">登出</a>
+    % if not user.avatar:
+    <img class="image-view" src="http://qaj94mfzx.bkt.clouddn.com/花木兰.png"><br>
+    % else:
+    <img class="image-view" src="${user.avatar}"><br>
+    % endif
+
+    ${user.username}<br>
+
+    <a class="a-style" href="${reverse('client_logout')}">登出</a><br>
+    <a class="a-style" href="${reverse('client_logoff')}">注销</a>
+    <input type="hidden" value="${user.id}" name="user_id">
+    ${csrf_token}
+
 </div>
+<a class="change-info" href="${reverse('change_info', kwargs={'user_id':user.id})}">修改信息</a>
 % else:
 <div class="form">
     <input id="username" type="text" placeholder="用户名" />

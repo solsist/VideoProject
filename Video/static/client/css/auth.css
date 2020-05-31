@@ -23,7 +23,7 @@ button{
 }
 
 .user-area{
-    width: 25%;
+    width: 50%;
     margin: 40% auto;
     text-align: center;
     font-size: 40px;
@@ -35,6 +35,22 @@ button{
     color: #2aabd2;
 }
 
+.image-view{
+    width:80px
+}
+
+.change-info{
+    width: 50%;
+    position:fixed;
+    bottom:10rem;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 25%;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    font-size: 30px;
+    color: #2aabd2;
+}
 
 
 

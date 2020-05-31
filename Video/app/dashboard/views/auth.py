@@ -3,7 +3,7 @@
 from django.views.generic import View
 from django.shortcuts import redirect, reverse
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import models, User
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from app.libs.base_render import render_to_response
 from app.utils.permission import dashboard_auth
@@ -69,11 +69,10 @@ class AdminManager(View):
 
 class UpdateAdminStatus(View):
 
-    def get(self, request):
+    def get(self, request, user_id):
         status = request.GET.get('status', 'on')
         _status = True if status == 'on' else False
-
-        request.user.is_superuser = _status
-        request.user.save()
-
+        user = User.objects.get(pk=user_id)
+        user.is_superuser = _status
+        user.save()
         return redirect(reverse('admin_manager'))

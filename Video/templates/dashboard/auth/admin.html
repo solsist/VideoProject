@@ -23,16 +23,18 @@
     </thead>
     <tbody>
         % for user in users:
-        <tr>
-        <td>${user.username}</td>
-        <td>${user.is_superuser}</td>
-        <td>${user.date_joined}</td>
-        % if user.is_superuser:
-        <td><a href="${reverse('admin_update_status')}?status=off">取消管理员</a> </td>
-        % else:
-        <td><a href="${reverse('admin_update_status')}?status=on">成为管理员</a> </td>
-        % endif
-        </tr>
+            % if str(user.username) != str(request.user):
+            <tr>
+            <td>${user.username}</td>
+            <td>${user.is_superuser}</td>
+            <td>${user.date_joined}</td>
+            % if user.is_superuser:
+            <td><a href="${reverse('admin_update_status', kwargs={'user_id': user.id})}?status=off">取消管理员</a> </td>
+            % else:
+            <td><a href="${reverse('admin_update_status', kwargs={'user_id': user.id})}?status=on">成为管理员</a> </td>
+            % endif
+            </tr>
+            % endif
         % endfor
     </tbody>
 </table>

@@ -135,7 +135,6 @@ class VideoStarView(View):
         name = request.POST.get('name')
         identity = request.POST.get('identity')
         video_id = request.POST.get('video_id')
-        print(name, identity, video_id)
         path_format = "{}".format(reverse('video_sub', kwargs={'video_id': video_id}))
 
         if not all([name, identity, video_id]):

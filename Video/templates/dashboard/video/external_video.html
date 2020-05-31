@@ -4,7 +4,7 @@
 <%
 from app.model.video import VideoType, FromType, NationalityType
 %>
-<h1>外链视频</h1>
+<h1>视频区</h1>
 <button class="btn btn-info open-btn" id="open-add-video-btn">创建</button>${error}
 <form id="video-edit-area" class="form-horizontal edit-area add-video-area" action="" method="post">${csrf_token}
     <div class="form-group">
@@ -80,8 +80,8 @@ from app.model.video import VideoType, FromType, NationalityType
              <td>${NationalityType(video.nationality).label}</td>
             <td><p class="info">${video.info}</p></td>
             <td>${video.status}</td>
-            <td>${video.create_time}</td>
-            <td>${video.update_time}</td>
+            <td>${str(video.create_time).split('.')[0]}</td>
+            <td>${str(video.update_time).split('.')[0]}</td>
             <td><a href="${reverse('video_update', kwargs={'video_id':video.id})}">编辑</a>
                 <a href="${reverse('video_sub', kwargs={'video_id':video.id})}">附属信息</a>
                 <a href="${reverse('update_status', kwargs={'video_id':video.id})}">修改状态</a>
@@ -116,8 +116,8 @@ from app.model.video import VideoType, FromType, NationalityType
              <td>${NationalityType(video.nationality).label}</td>
             <td><p class="info">${video.info}</p></td>
             <td>${video.status}</td>
-            <td>${video.create_time}</td>
-            <td>${video.update_time}</td>
+            <td>${str(video.create_time).split('.')[0]}</td>
+            <td>${str(video.update_time).split('.')[0]}</td>
             <td><a href="${reverse('video_update', kwargs={'video_id':video.id})}">编辑</a>
                 <a href="${reverse('video_sub', kwargs={'video_id':video.id})}">附属信息</a>
                 <a href="${reverse('update_status', kwargs={'video_id':video.id})}">修改状态</a>
